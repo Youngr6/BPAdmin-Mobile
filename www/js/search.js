@@ -10,24 +10,31 @@ $(document).ready(function () {
             data: { searchTerm: $('#searchText').val() },
             dataType: 'json',
             success: function (data) {
-                var markup = [];
 
-                $.each(data.baskets, function (i, obj) {
-                    markup.push("<li>");
-                    markup.push("<h1>" + obj.CustomerName+"</h1>");
-                    markup.push("<p>" + obj.EMailAddress + "</p>");
-                    if (obj.BasketItems != undefined) {
-                        $.each(obj.BasketItems, function (i, item) {
-                            markup.push("<p>");
-                            markup.push(item.DateAdded + " " + item.Quantity + " x " + item.ProductName + ': ' + item.ProductOptions);
-                            markup.push("</p>");
-                        });
-                    }
-                    markup.push("</li>");
-                });
+                if (data.success == false) {
+                    alert("Failed: " + data.error);
+                }
+                else {
 
-                $('#searchResults').html(markup.join(""));
-                $('#searchResults').listview('refresh');
+                    var markup = [];
+
+                    $.each(data.baskets, function (i, obj) {
+                        markup.push("<li>");
+                        markup.push("<h1>" + obj.CustomerName + "</h1>");
+                        markup.push("<p>" + obj.EMailAddress + "</p>");
+                        if (obj.BasketItems != undefined) {
+                            $.each(obj.BasketItems, function (i, item) {
+                                markup.push("<p>");
+                                markup.push(item.DateAdded + " " + item.Quantity + " x " + item.ProductName + ': ' + item.ProductOptions);
+                                markup.push("</p>");
+                            });
+                        }
+                        markup.push("</li>");
+                    });
+
+                    $('#searchResults').html(markup.join(""));
+                    $('#searchResults').listview('refresh');
+                }
             },
             error: function (data) {
                 alert('Failed');
