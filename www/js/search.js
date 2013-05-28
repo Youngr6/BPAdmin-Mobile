@@ -25,7 +25,7 @@ $(document).ready(function () {
                         if (obj.BasketItems != undefined) {
                             $.each(obj.BasketItems, function (i, item) {
                                 markup.push("<p>");
-                                markup.push(item.DateAdded + " " + item.Quantity + " x " + item.ProductName + ': ' + item.ProductOptions);
+                                markup.push(formatJSONDate(item.DateAdded) + " " + item.Quantity + " x " + item.ProductName + ': ' + item.ProductOptions);
                                 markup.push("</p>");
                             });
                         }

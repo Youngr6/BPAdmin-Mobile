@@ -45,6 +45,10 @@ var app = {
 
 var baseURL = "http://mobile.bluepony.co.uk";
 
+function formatJSONDate(jsonDate) {
+    var newDate = new Date(parseInt(jsonDate.substr(6)));
+    return newDate.getDate()+'/'+(newDate.getMonth()+1)+'/' + newDate.getFullYear();
+}
 $(document).ready(function () {
 
     $.ajaxSetup({ cache: false });
