@@ -14,12 +14,12 @@ $(document).ready(function () {
 
                 $.each(data.baskets, function (i, obj) {
                     markup.push("<li>");
-                    markup.push("<h1>" + obj.CustomerName + " " + obj.EMailAddress + "</h1>");
-                    if (obj.Basket != undefined) {
-                        markup.push("<p>" + obj.Basket.DateAdded + "</p>");
-                        $.each(obj.Basket.Items, function (i, item) {
+                    markup.push("<h1>" + obj.CustomerName+"</h1>");
+                    markup.push("<p>" + obj.EMailAddress + "</p>");
+                    if (obj.BasketItems != undefined) {
+                        $.each(obj.BasketItems, function (i, item) {
                             markup.push("<p>");
-                            markup.push(item.ProductName + ' - ' + item.ProductOptions);
+                            markup.push(item.DateAdded + " " + item.Quantity + " x " + item.ProductName + ': ' + item.ProductOptions);
                             markup.push("</p>");
                         });
                     }

@@ -41,7 +41,9 @@ var app = {
     }
 };
 
-var baseURL = "http://92.19.252.49/BPAdminService";
+//var baseURL = "http://92.19.252.49/BPAdminService";
+
+var baseURL = "http://mobile.bluepony.co.uk";
 
 $(document).ready(function () {
 
