@@ -40,3 +40,30 @@ var app = {
         completeElem.className = completeElem.className.split('hide').join('');
     }
 };
+
+var baseURL = "http://92.19.252.49/BPAdminService";
+
+$(document).ready(function () {
+
+    $.ajaxSetup({ cache: false });
+    $.support.cors = true;
+    $.mobile.allowCrossDomainPages = true;
+
+    $('#btnLogin').click(function () {
+
+        $.ajax
+        ({
+            type: "POST",
+            url: baseURL + "/account/clientlogin",
+            dataType: 'json',
+            data: { UserName: $('#txtUsername').val(), Password: $('#txtPassword').val() },
+            success: function (jsonData) {
+                alert('success! - ' + jsonData.success);
+            },
+            error: function (request, error) {
+                alert('failed ' + error);
+            }
+        });
+    });
+});
+

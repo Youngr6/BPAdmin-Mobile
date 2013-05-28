@@ -23,36 +23,25 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Online Users</title>
+        <title>Orders</title>
 
     </head>
     <body>
-        <style>
-          .nav-glyphish-example .ui-btn .ui-btn-inner { padding-top: 40px !important; }
-          .nav-glyphish-example .ui-btn .ui-icon { width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: none !important; border-radius: none !important; }
-    
-          #home   .ui-icon { background:  url('img/53-house.png') 50% 50% no-repeat; background-size: 32px 21px; }
-          #online .ui-icon { background:  url('img/112-group.png') 50% 50% no-repeat; background-size: 24px 22px; }
-          #orders .ui-icon { background:  url('img/137-presentation.png') 50% 50% no-repeat; background-size: 24px 22px; }
-          #graphs .ui-icon { background:  url('img/17-bar-chart.png') 50% 50% no-repeat; background-size: 24px 22px; }
-          #search .ui-icon { background:  url('img/19-gear.png') 50% 50% no-repeat; background-size: 26px 26px; }    
-        </style>
 
-
-        <div data-role="page" data-title="Online" id="OnlinePage">
+        <div data-role="page" data-title="Orders" id="OrdersPage">
 
         <script type="text/javascript">
-            refreshUsers();
+            refreshOrders();
         </script>
 
           <section id="main">
               
                 <div data-role="header" style="background-image:url('Images/background2.jpg');" data-theme="b" data-position="inline">
-                  <a onclick="refreshUsers();" id="btnRefreshUsers" data-icon="refresh" class="ui-btn-right" >Refresh</a>
-                  <h1>Online Users</h1>
+                  <a onclick="refreshOrders();" id="btnRefreshOrders" data-icon="refresh" class="ui-btn-right" >Refresh</a>
+                  <h1>Todays Orders</h1>
                 </div>
 
-                <ul data-role="listview" id="onlineUsers">
+                <ul data-role="listview" id="todaysOrders">
                 </ul>
 
           </section>
