@@ -50,10 +50,18 @@ function formatJSONDate(jsonDate) {
     return newDate.getDate()+'/'+(newDate.getMonth()+1)+'/' + newDate.getFullYear();
 }
 $(document).ready(function () {
-
+    $.mobile.defaultPageTransition = 'none';
     $.ajaxSetup({ cache: false });
     $.support.cors = true;
     $.mobile.allowCrossDomainPages = true;
+
+    var loginData = isLoggedIn();
+    if (loginData.loggedIn) {
+        $('#loginPanel').hide();
+        refreshSummaryData();
+        setSummaryPageRefresh();
+        $('#summaryLoginButton').text(loginData.name);
+    } else $('#summaryPanel').hide();
 
     $('#btnLogin').click(function () {
 
@@ -64,12 +72,67 @@ $(document).ready(function () {
             dataType: 'json',
             data: { UserName: $('#txtUsername').val(), Password: $('#txtPassword').val() },
             success: function (jsonData) {
-                alert('success! - ' + jsonData.success);
+                $('#loginPanel').hide();
+                $('#summaryPanel').show();
+                refreshSummaryData();
+                setSummaryPageRefesh();
+
             },
             error: function (request, error) {
-                alert('failed ' + error);
+                $('#summaryPanel').hide();
+                alert('Invalid username or password' + error);
             }
         });
     });
 });
+
+var homeIntervalId;
+
+function setSummaryPageRefresh() {
+    $('#HomePage').on('pageshow', function () {
+        homeIntervalId = window.setInterval(refreshSummaryData, 30000);
+    });
+
+    $('#HomePage').on('pagehide', function () {
+        clearInterval(homeIntervalId);
+    });
+}
+
+function isLoggedIn() {
+    var loginData;
+    $.ajax({
+        type: "POST",
+        async:false,
+        url: baseURL + "/account/isloggedin",
+        dataType: 'json',
+        success: function (jsonData) {
+            loginData = jsonData;
+        },
+        error: function (request, error) {
+            loginData = new { loggedIn : false, name : 'Guest' };
+        }
+    });
+    return loginData;
+}
+
+function refreshSummaryData() {
+    $.ajax
+    ({
+        type: "POST",
+        url: baseURL + "/monitor/gettodaysdata",
+        dataType: 'json',
+        success: function (jsonData) {
+            $('#summaryPanel').show();
+            $("#numOrdersToday").text("(" + jsonData.stats.NumOrdersToday + ")");
+            $("#orderAmtToday").html("&pound;" + jsonData.stats.OrderAmtToday);
+            $("#numUsersOnline").text(jsonData.stats.NumUsersOnline);
+            $("#basketAmt").html("&pound;" + jsonData.stats.BasketAmount);
+        },
+        error: function (request, error) {
+            alert('failed - ' + error);
+        }
+    });
+
+}
+
 

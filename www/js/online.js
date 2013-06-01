@@ -1,7 +1,15 @@
 ﻿
 
+var onlineIntervalId;
 
 $(document).ready(function () {
+    $('#OnlinePage').on('pageshow', function () {
+        onlineIntervalId = window.setInterval(refreshUsers, 5000);
+    });
+
+    $('#OnlinePage').on('pagehide', function () {
+        clearInterval(onlineIntervalId);
+    });
 
 });
 
@@ -12,6 +20,8 @@ function refreshUsers() {
 
     $.ajax
     ({
+        beforeSend: function () { $.mobile.showPageLoadingMsg(); }, //Show spinner
+        complete: function () { $.mobile.hidePageLoadingMsg() }, //Hide spinner
         type: "POST",
         url: baseURL + "/monitor/GetTodaysData",
         dataType: 'json',

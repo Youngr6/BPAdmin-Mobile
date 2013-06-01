@@ -42,6 +42,14 @@
         <div data-role="page" data-title="Online" id="OnlinePage">
 
         <script type="text/javascript">
+            $('#OnlinePage').on('pageshow', function () {
+                onlineIntervalId = window.setInterval(refreshUsers, 10000);
+            });
+
+            $('#OnlinePage').on('pagehide', function () {
+                clearInterval(onlineIntervalId);
+            });
+
             refreshUsers();
         </script>
 

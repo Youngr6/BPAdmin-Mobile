@@ -7,6 +7,8 @@ $(document).ready(function () {
 
 function drawChart() {
     $.ajax({
+        beforeSend: function () { $.mobile.showPageLoadingMsg(); }, //Show spinner
+        complete: function () { $.mobile.hidePageLoadingMsg() }, //Hide spinner
         type: "POST",
         url: baseURL + "/monitor/GetWeeklyStatsData",
         dataType: 'json',

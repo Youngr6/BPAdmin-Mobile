@@ -12,6 +12,8 @@ function refreshOrders() {
 
     $.ajax
     ({
+        beforeSend: function () { $.mobile.showPageLoadingMsg(); }, //Show spinner
+        complete: function () { $.mobile.hidePageLoadingMsg() }, //Hide spinner
         type: "POST",
         url: baseURL + "/monitor/GetTodaysData",
         dataType: 'json',

@@ -49,16 +49,34 @@
 
           <section id="main">
             <div data-role="header" style="background-image:url('Images/background2.jpg');" data-theme="b" data-position="fixed">
-                <h1>BluePony Monitor</h1>
+                <a onclick="#" id="summaryLoginButton" class="ui-btn-right" >Login</a>
+                <h1>BluePony</h1>
             </div>
 
-            <div data-role="content"  data-inset="true">
-                <label for="txtUsername">Username:</label>
-                <input type="text" id="txtUsername" name="txtUsername" />
-                <label for="txtPassword">Password:</label>
-                <input type="password" id="txtPassword" name="txtPassword" />
-               <input type="button" id="btnLogin" value="Login"/>
+            <div id="loginPanel">
+                <div data-role="content"  data-inset="true">
+                    <label for="txtUsername">Username:</label>
+                    <input type="text" id="txtUsername" name="txtUsername" />
+                    <label for="txtPassword">Password:</label>
+                    <input type="password" id="txtPassword" name="txtPassword" />
+                   <input type="button" id="btnLogin" value="Login"/>
+                </div>
             </div>
+
+            <div data-role="content" id="summaryPanel">
+                <ul data-role="listview">
+                <li>
+                    <span>Todays Orders </span><span id="numOrdersToday"></span> <span style="float:right;" id="orderAmtToday"></span>
+                </li>
+                <li>
+                    <span>Users Online</span> <span style="float:right;" id="numUsersOnline"></span>
+                </li>
+                <li>
+                    <span>Basket Amount</span> <span style="float:right;" id="basketAmt"></span>
+                </li>
+                </ul>
+            </div>
+
           </section>
 
           <div data-role="footer" class="nav-glyphish-example" data-position="fixed" data-id="mainNavFooter" data-theme="a">
@@ -82,6 +100,7 @@
         
         <script type="text/javascript">
             app.initialize();
+            
         </script>
     </body>
 </html>
