@@ -49,8 +49,14 @@ function formatJSONDate(jsonDate) {
     var newDate = new Date(parseInt(jsonDate.substr(6)));
     return newDate.getDate()+'/'+(newDate.getMonth()+1)+'/' + newDate.getFullYear();
 }
+
+$(document).bind("mobileinit", function() {
+    	      $.mobile.page.prototype.options.addBackBtn = true;
+    });
+
 $(document).ready(function () {
     $.mobile.defaultPageTransition = 'none';
+    $.mobile.page.prototype.options.addBackBtn = true;
     $.ajaxSetup({ cache: false });
     $.support.cors = true;
     $.mobile.allowCrossDomainPages = true;
@@ -91,16 +97,20 @@ var homeIntervalId;
 function setSummaryPageRefresh() {
     $('#HomePage').on('pageshow', function () {
         homeIntervalId = window.setInterval(refreshSummaryData, 30000);
+        refreshSummaryData();
     });
 
     $('#HomePage').on('pagehide', function () {
         clearInterval(homeIntervalId);
     });
+
 }
 
 function isLoggedIn() {
     var loginData;
     $.ajax({
+        beforeSend: function () { $.mobile.showPageLoadingMsg(); }, //Show spinner
+        complete: function () { $.mobile.hidePageLoadingMsg() }, //Hide spinner
         type: "POST",
         async:false,
         url: baseURL + "/account/isloggedin",
@@ -118,6 +128,8 @@ function isLoggedIn() {
 function refreshSummaryData() {
     $.ajax
     ({
+        beforeSend: function () { $.mobile.showPageLoadingMsg(); }, //Show spinner
+        complete: function () { $.mobile.hidePageLoadingMsg() }, //Hide spinner
         type: "POST",
         url: baseURL + "/monitor/gettodaysdata",
         dataType: 'json',

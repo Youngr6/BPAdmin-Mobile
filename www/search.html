@@ -37,8 +37,10 @@
 
             <div data-role="content">
                 <label for="searchText">Email address:</label>
-                <input type="search" id="searchText" name="searchText"/>
-                <input type="button" id="btnSearch" value="Search" />
+                <div data-role="fieldcontain">
+                <input type="search" id="searchText" name="searchText" data-inline="true"/>
+                <input type="button" id="btnSearch" value="Search" data-inline="true"/>
+                </div>
 
                 <div>
                     <ul id="searchResults" data-role="listview" data-inset="true" data-autodividers="true">
