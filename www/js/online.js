@@ -3,13 +3,6 @@
 var onlineIntervalId;
 
 $(document).ready(function () {
-    $('#OnlinePage').on('pageshow', function () {
-        onlineIntervalId = window.setInterval(refreshUsers, 5000);
-    });
-
-    $('#OnlinePage').on('pagehide', function () {
-        clearInterval(onlineIntervalId);
-    });
 
 });
 

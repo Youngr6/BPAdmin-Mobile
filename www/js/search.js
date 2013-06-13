@@ -24,12 +24,14 @@ $(document).ready(function () {
                         markup.push("<li>");
                         markup.push("<h1>" + obj.CustomerName + "</h1>");
                         markup.push("<p>" + obj.EMailAddress + "</p>");
-                        if (obj.BasketItems != undefined) {
+                        if (obj.BasketItems != undefined && obj.BasketItems.length > 0) {
+                            markup.push("<p><ul>");
                             $.each(obj.BasketItems, function (i, item) {
-                                markup.push("<p>");
-                                markup.push(formatJSONDate(item.DateAdded) + " " + item.Quantity + " x " + item.ProductName + ': ' + item.ProductOptions);
-                                markup.push("</p>");
+                                markup.push("<li>");
+                                markup.push(formatJSONDate(item.DateAdded) + "<br/>&nbsp;" + item.Quantity + " x " + item.ProductName + '<br/>&nbsp;' + item.ProductOptions);
+                                markup.push("</li>");
                             });
+                            markup.push("</ul></p>");
                         }
                         markup.push("</li>");
                     });
